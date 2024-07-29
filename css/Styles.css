@@ -2,11 +2,11 @@
 body {
     background-image: 
         linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7)), 
-        url('Designer-6.png');
+        url('../images/Gym-Genius-Logo.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center; 
-    background-size: 800px 700px;
+    background-size: 500px 500px;
     font-family: Arial, sans-serif;
     background-color: black;
 }
@@ -76,4 +76,5 @@ body {
     bottom: 0;
     width: 100%;
     text-align: center;
+    
 }
