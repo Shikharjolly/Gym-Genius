@@ -1,0 +1,125 @@
+body  {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+ 
+    
+}
+
+
+
+
+header {
+    background: #0d0d0d;
+    color: #fff;
+    padding: 0.5em 0;
+    
+}
+
+nav .div-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1em;
+}
+
+nav h1 {
+    margin: 0;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+.nav-element {
+    margin-left: 1em;
+    opacity: 0.7;
+    transition: 0.3s;
+}
+.nav-element:hover {
+    opacity: 1;
+   
+   
+}
+
+
+.nav-link{
+    color: #fff;
+    text-decoration: none;
+} 
+
+.heading-banner {
+    background: url('../images/Gym-Genius-Logo.png') no-repeat center center/cover;
+    background-size: 400px 400px;
+    color: #fff;
+    text-align: center;
+    padding: 5em 1em;
+    text-shadow: 3px 3px 12px rgb(0, 0, 0);
+}
+
+
+
+.button {
+    display: inline-block;
+    background: #a20101;
+    color: #fff;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+/* Main content styling */
+main {
+    padding: 2em 1em;
+}
+
+.div-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h2 {
+    margin-bottom: 0.5em;
+}
+
+.event-lists {
+    display: flex;
+    gap: 1em;
+}
+
+.type-of-event {
+    flex: 1;
+    padding: 1em;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+form label {
+    margin-bottom: 0.2em;
+}
+
+form input, form textarea {
+    padding: 0.5em;
+    border: 1px solid #f8b4b4;
+    border-radius: 5px;
+ 
+  
+  
+}
+
+
+
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 2em;
+}
