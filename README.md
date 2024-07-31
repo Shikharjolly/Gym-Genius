@@ -5,7 +5,7 @@ The only bad workout is one that did not happen
 
 
 ## Overview 
-This webapp will allow users to create a profile through which they will be able to track thier fitness goals, as well as find and book events near them. Once an account is created, the user is directed to a login page. After putting in their information, they are led to a profile page. Which has two parts.
+This webapp will allow users to create a profile through which they will be able to track their fitness goals, as well as find and book events near them. Once an account is created, the user is directed to a login page. After putting in their information, they are led to a profile page. Which has two parts.
 
 Part 1 - This is used to document workouts to optimize which parts of the body need more or less focus
 
