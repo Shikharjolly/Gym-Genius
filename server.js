@@ -4,21 +4,24 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
 
-// Initialize the app
-const app = express();
-const PORT = process.env.PORT || 5000;
 
-// Middleware
+const app = express();
+
+const PORT = 5000;
+const num = 23;
+
+
 app.use(cors());
+
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Connect to MongoDB
+
 mongoose.connect('mongodb+srv://movieguy3333:Eg3csWV4A@testapicluster.qmp6iba.mongodb.net/?retryWrites=true&w=majority&appName=TestApiCluster');
 const db = mongoose.connection;
 db.once('open', () => console.log('Connected to Database'));
 
-// Define the Event schema and model
+
 const gymEventSchema = new mongoose.Schema({
     name: { type: String, required: true },
     date: { type: Date, required: true },
@@ -29,7 +32,7 @@ const gymEventSchema = new mongoose.Schema({
 
 const gymEvent = mongoose.model('Event', gymEventSchema);
 
-// Routes
+
 app.get('/api/events', async (req, res) => {
    
         const events = await gymEvent.find();
@@ -61,13 +64,14 @@ app.delete('/api/events/:id', async (req, res) => {
         const result = await gymEvent.findByIdAndDelete(req.params.id);
         if (result) {
             res.json({ message: 'gymEvent deleted successfully' });
+
         } else {
             res.status(404).json({ message: 'gymEvent not found' });
         }
    
 });
 
-// Serve static files
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(PORT, () => {
