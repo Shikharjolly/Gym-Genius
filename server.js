@@ -51,23 +51,19 @@ app.post('/api/events', async (req, res) => {
 app.put('/api/events/:id', async (req, res) => {
    
         const event = await gymEvent.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        if (event) {
+       
             res.json(event);
-        } else {
-            res.status(404).json({ message: 'gymEvent not found' });
-        }
+       
   
 });
 
 app.delete('/api/events/:id', async (req, res) => {
    
         const result = await gymEvent.findByIdAndDelete(req.params.id);
-        if (result) {
-            res.json({ message: 'gymEvent deleted successfully' });
+       
+        
 
-        } else {
-            res.status(404).json({ message: 'gymEvent not found' });
-        }
+      
    
 });
 
