@@ -1,0 +1,114 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+.bg-image{
+  /* The image used */
+  background-image: url("../../images/Gym-Genius-Logo.png");
+
+  /* Add the blur effect */
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+
+  /* Full height */
+  height: 100%; 
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    
+}
+h2{
+    margin-left: 41%;
+}
+
+main {
+    padding: 2em;
+  
+    
+}
+
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: auto;
+
+   
+
+}
+
+label, input, textarea {
+    margin-bottom: 20px;
+}
+
+
+button {
+    padding: 7px 15px;
+    background-color: #0006b5;
+    color: white;
+    border: none;
+    cursor: pointer;
+    opacity: 0.90;
+    transition: 0.2s;
+}
+.edit-button{
+    background-color: green;
+}
+
+button:hover {
+    opacity: 1;
+    
+}
+
+#event-list {
+    margin-top: 20px;
+}
+
+.event-item {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+.event-item #edit-button {
+    background-color: rgb(0, 113, 21);
+  
+}
+.event-item #delete-button {
+    background-color: rgb(142, 1, 1);
+  
+}
+.event-item button {
+    
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.event-item button:hover {
+    background-color: darkred;
+}
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 2em;
+}
+
