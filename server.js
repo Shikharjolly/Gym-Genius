@@ -4,10 +4,13 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
 
+// copy and paste the following link to browser:
+// http://localhost:2000/event.html
+
 
 const app = express();
 
-const PORT = 5000;
+const PORT = 2000;
 const num = 23;
 
 
