@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gym Home Page</title>
+  <link rel="stylesheet" href="./css/gstyless.css">
+</head>
+<body>
+<header>
+  <h1>Gym Home Page</h1>
+</header>
+<main>
+  <div class="content-wrapper">
+    <section class="workouts">
+      <h2>Manage Your Workouts</h2>
+      <div class="flex-container">
+        <form class="workout-form">
+          <input type="text" id="workout-input" placeholder="Add a new workout">
+          <button type="button" onclick="addWorkout()">Add Workout</button>
+        </form>
+        <ul id="workout-list"></ul>
+      </div>
+    </section>
+    <section class="events">
+      <h2>Upcoming Gym Events</h2>
+      <form class="event-form">
+        <input type="text" id="event-input" placeholder="Add a new event">
+        <button type="button" onclick="addEvent()">Add Event</button>
+      </form>
+      <div class="events-slider" id="events-slider">
+        <!-- Events will be added here -->
+      </div>
+      <div class="events-nav">
+        <button onclick="prevSlide()">Previous</button>
+        <button onclick="nextSlide()">Next</button>
+      </div>
+    </section>
+  </div>
+</main>
+<script src="gscripts.js"></script>
+</body>
+</html>
