@@ -3,24 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gym Profile Page</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Gym Home Page</title>
+  <link rel="stylesheet" href="gstyless.css">
 </head>
 <body>
-  <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center">
-    <!-- Background Image -->
-    <img src="profile-cover.jpg" alt="Profile Background" class="background-img"
-   
-   <!-- headerr -->
-    <div class="container-fluid d-flex align-items-center">
-      <div class="row">
-        <div class="col-lg-7 col-md-10">
-          <h1 class="display-2 text-white">Welcome Back</h1>
-          <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your Events or create Events</p>
-          <a href="#!" class="btn btn-info">Edit profile</a>
-        </div>
+<header>
+  <h1>Gym Home Page</h1>
+</header>
+<main>
+  <div class="content-wrapper">
+    <section class="workouts">
+      <h2>Manage Your Workouts</h2>
+      <div class="flex-container">
+        <form class="workout-form">
+          <input type="text" id="workout-input" placeholder="Add a new workout">
+          <button type="button" onclick="addWorkout()">Add Workout</button>
+        </form>
+        <ul id="workout-list"></ul>
       </div>
-    </div>
+    </section>
+    <section class="events">
+      <h2>Upcoming Gym Events</h2>
+      <form class="event-form">
+        <input type="text" id="event-input" placeholder="Add a new event">
+        <button type="button" onclick="addEvent()">Add Event</button>
+      </form>
+      <div class="events-slider" id="events-slider">
+        <!-- Events will be added here -->
+      </div>
+      <div class="events-nav">
+        <button onclick="prevSlide()">Previous</button>
+        <button onclick="nextSlide()">Next</button>
+      </div>
+    </section>
   </div>
+</main>
+<script src="gscripts.js"></script>
 </body>
 </html>
