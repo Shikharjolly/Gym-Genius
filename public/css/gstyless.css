@@ -6,7 +6,7 @@ body {
 }
 
 header {
-    background-image: url('https://github.com/Shikharjolly/Gym-Genius/blob/main/images/Gym-Genius-Logo.png?raw=true');
+    background-image: url('../images/Gym-Genius-Logo.png');
     background-size: cover; 
     background-position: center;
     color: white;

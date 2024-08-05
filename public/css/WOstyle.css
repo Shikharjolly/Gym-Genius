@@ -1,10 +1,11 @@
-body{
-    font-family: Arial, sans-serif;
+body  {
     margin: 0;
-    padding: 0;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
 }
 
-header{
+
+header {
     background: #0d0d0d;
     color: #fff;
     padding: 0.4px;
@@ -18,42 +19,36 @@ header{
     padding-right: 5em;
 }
 
-nav h1{
+nav h1 {
     margin: 0;
 }
 
-nav ul{
-    list-style:none;
+nav ul {
+    list-style: none;
     display: flex;
 }
 
-.nav-element{
+.nav-element {
     margin-left: 26px;
     opacity: 0.7;
     transition: 0.3s;
 }
-.nav-element:hover{
+.nav-element:hover {
     opacity: 1;
-    background-color: rgb(29,29,29);
+    background-color: rgb(29, 29, 29);
 }
 .nav-link{
     color: #fff;
     text-decoration: none;
-}
-
-.heading-banner{
-    background: url(../images/Gym-Genius-Logo.png) no-repeat center center/cover;
+} 
+.heading-banner {
+    background: url('../images/Gym-Genius-Logo.png') no-repeat center center/cover;
     background-size: 400px 400px;
-    color:#fff;
+    color: #fff;
     text-align: center;
     padding: 5em 1em;
-    text-shadow: 3px 3px 12px rgb(0,0,0);
+    text-shadow: 3px 3px 12px rgb(0, 0, 0);
 }
-
-h2{
-    margin-left: 41%;
-}
-
 main{
     padding: 2em;
 }
