@@ -36,6 +36,7 @@ const gymEventSchema = new mongoose.Schema({
 const gymEvent = mongoose.model('Event', gymEventSchema);
 
 
+
 app.get('/api/events', async (req, res) => {
    
         const events = await gymEvent.find();

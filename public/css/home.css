@@ -84,7 +84,7 @@ h2 {
     margin-bottom: 0.5em;
 }
 
-.event-lists {
+.events {
     display: flex;
     gap: 1em;
 }
@@ -115,6 +115,12 @@ form input, form textarea {
  
   
   
+}
+
+.event-item {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 15px;
 }
 
 
