@@ -1,4 +1,16 @@
-document.addEventListener('DOMContentLoaded', () => {
+const { response } = require("express");
+
+document.addEventListener('DOMContentLoaded', function () => {
+  
+  fetch('/user/123')
+    .then(response => response.json())
+    .then(user =>{
+      document.getElementById('profile-photo').src= user.profilePhoto || 'deault-profilr.png';
+      document.getElementById('profile-name').textContent ='${user.firstName} ${user.lastName}';
+      document.getElementById('profile-bio').textContent = user.bio || 'No bio available'
+    });
+  
+  
   const workoutData = [];
   const eventData = [];
   let currentSlide = 0;

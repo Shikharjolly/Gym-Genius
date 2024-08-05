@@ -32,6 +32,54 @@ header::before {
     z-index: 1;
 }
 
+.profile{
+    padding: 1em;
+    background: #f9f9f9;
+    border-radius: 8px;
+}
+
+.profile-content{
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+
+.profile-photo{
+    width: 150px;
+    height: 150px;
+    border-radius: 505%;
+    object-fit: cover;
+    border: 2px solid #ddd;
+}
+.profile-info{
+    max-width: 500px;
+}
+
+.profile-info h3{
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.profile-info p{
+    margin-top: 0.5em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 main {
     padding: 2em;
 }
