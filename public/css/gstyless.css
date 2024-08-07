@@ -6,31 +6,68 @@ body {
 }
 
 
+
 header {
-    background-image: url('../images/Gym-Genius-Logo.png');
-    background-size: cover; 
-    background-position: center;
-    color: white;
-    padding: 2em 0; 
+    background: #0d0d0d;
+    color: #fff;
+    padding: 0.4px;
+    
+}
+
+#nav-container{
+   
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 5em;
+    padding-right: 5em;
+}
+
+nav h1 {
+    margin: 0;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+.nav-element {
+    margin-left: 26px;
+    opacity: 0.7;
+    transition: 0.3s;
+}
+.nav-element:hover {
+    opacity: 1;
+    background-color: rgb(29, 29, 29);
+   
+   
+}
+
+
+.nav-link{
+    color: #fff;
+    text-decoration: none;
+} 
+
+.heading-banner {
+    background: url('../images/Gym-Genius-Logo.png') no-repeat center center/cover;
+    background-size: 400px 400px;
+    color: #fff;
     text-align: center;
-    position: relative;
-    min-height: 100px; 
+    padding: 5em 1em;
+    text-shadow: 3px 3px 12px rgb(0, 0, 0);
 }
 
-header h1 {
-    position: relative;
-    z-index: 2;
-}
 
-header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1;
+
+.button {
+    display: inline-block;
+    background: #a20101;
+    color: #fff;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    border-radius: 5px;
 }
 
 .profile{

@@ -78,6 +78,18 @@ input[type="submit"] {
   border-color: white;
   min-width: 300px;
 }
+button{
+  display: block;
+  width: 60%;
+  margin: 1em auto;
+  height: 2em;
+  font-size: 1.1rem;
+  background-color: #0e0e3a;
+  border-color: white;
+  min-width: 300px;
+  color: aliceblue;
+
+}
 
 input[type="file"] {
   padding: 1px 2px;

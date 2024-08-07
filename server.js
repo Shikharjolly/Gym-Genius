@@ -3,6 +3,9 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+
 
 // copy and paste the following link to browser:
 // http://localhost:2000/event.html
@@ -11,12 +14,14 @@ const path = require('path');
 const app = express();
 
 const PORT = 2000;
+const jwtSecret = 'your_jwt_secret_key';
 const num = 23;
 
 
 app.use(cors());
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
@@ -24,6 +29,66 @@ mongoose.connect('mongodb+srv://movieguy3333:Eg3csWV4A@testapicluster.qmp6iba.mo
 const db = mongoose.connection;
 db.once('open', () => console.log('Connected to Database'));
 
+
+
+const userSchema = new mongoose.Schema({
+        username: { type: String, unique: true, required: true },
+        email: { type: String, unique: true, required: true },
+        password: { type: String, required: true },
+        bio: { type: String }
+    });
+    
+    const User = mongoose.model('User', userSchema);
+    
+
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(express.static('public'));
+    
+
+    app.post('/signup', async (req, res) => {
+        try {
+            const { username, email, password, bio } = req.body;
+            const hashedPassword = await bcrypt.hash(password, 10);
+            const user = new User({ username, email, password: hashedPassword, bio });
+            await user.save();
+            res.status(200).send('User registered');
+        } catch (err) {
+            res.status(500).send('Error registering user');
+        }
+    });
+    
+
+    app.post('/login', async (req, res) => {
+        try {
+            const { username, password } = req.body;
+            const user = await User.findOne({ username });
+            if (!user) return res.status(401).send('Invalid username or password');
+            const isMatch = await bcrypt.compare(password, user.password);
+            if (!isMatch) return res.status(401).send('Invalid username or password');
+            const token = jwt.sign({ id: user._id }, jwtSecret);
+            res.json({ token });
+        } catch (err) {
+            res.status(500).send('Error logging in');
+        }
+    });
+    
+ 
+    app.get('/profile', async (req, res) => {
+        const token = req.headers['authorization'];
+        if (!token) return res.status(401).send('No token provided');
+        jwt.verify(token, jwtSecret, async (err, decoded) => {
+            if (err) return res.status(401).send('Invalid token');
+            try {
+                const user = await User.findById(decoded.id).select('username email bio');
+                if (!user) return res.status(404).send('User not found');
+                res.json(user);
+            } catch (err) {
+                res.status(500).send('Error fetching profile');
+            }
+        });
+    });
+    
 
 const gymEventSchema = new mongoose.Schema({
     name: { type: String, required: true },

@@ -7,10 +7,30 @@
   <link rel="stylesheet" href="./css/gstyless.css">
 </head>
 <body>
-<header>
- 
-  <h1>GymGenius</h1>
+  <header>
+    <nav>
+        <div id ="nav-container">
+            <h1>GymGenius</h1>
+            <ul>
+                <li class = "nav-element"><a class = "nav-link" href="http://localhost:2000/home.html">Home</a></li>
+                <li class = "nav-element"><a class = "nav-link" href="http://localhost:2000/Profilep.html">Profile</a></li>
+                <li class = "nav-element"><a class = "nav-link" href="http://localhost:2000/event.html">Events</a></li>
+                <li class = "nav-element"><a class = "nav-link" href="#">Bookings</a></li>
+            </ul>
+        </div>
+    </nav> 
+    <section id="home" class="heading-banner">
+        <div class="banner-content">
+            <h2>The smarter way to workout!</h2>
+           
+        </div>
+    </section>
 </header>
+<h1>Profile</h1>
+    <p id="username">Loading...</p>
+    <p id="email"></p>
+    <p id="bio"></p>
+    <a href="login.html" id="logout">Logout</a>
 
 <div class="content-wrapper">
   <section class="profile">
@@ -52,6 +72,33 @@
     </section>
   </div>
 </main>
-<script src="gscripts.js"></script>
+<!-- <script src="gscripts.js"></script> -->
+<script>
+ 
+  document.addEventListener('DOMContentLoaded', async () => {
+   
+const token = localStorage.getItem('token');
+if (!token) {
+  window.location.href = 'login.html';
+  return;
+}
+
+// Fetch profile data
+const response = await fetch('/profile', {
+  headers: { 'Authorization': token }
+});
+
+if (response.ok) {
+  const user = await response.json();
+  document.getElementById('username').innerText = `Username: ${user.username}`;
+  document.getElementById('email').innerText = `Email: ${user.email}`;
+  document.getElementById('bio').innerText = `Bio: ${user.bio}`;
+} else {
+  alert('Error loading profile');
+  window.location.href = 'login.html';
+}
+});
+
+</script>
 </body>
 </html>
