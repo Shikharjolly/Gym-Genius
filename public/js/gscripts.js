@@ -1,6 +1,6 @@
 const { response } = require("express");
 
-document.addEventListener('DOMContentLoaded', function () => {
+/*
   
   fetch('/user/123')
     .then(response => response.json())
@@ -8,8 +8,55 @@ document.addEventListener('DOMContentLoaded', function () => {
       document.getElementById('profile-photo').src= user.profilePhoto || 'deault-profilr.png';
       document.getElementById('profile-name').textContent ='${user.firstName} ${user.lastName}';
       document.getElementById('profile-bio').textContent = user.bio || 'No bio available'
-    });
+    });*/
   
+   
+    document.addEventListener('DOMContentLoaded', async () => {
+   
+      const token = localStorage.getItem('token');
+        if (!token) {
+          window.location.href = 'login.html';
+          return;
+        }
+    
+          // Fetch profile data
+      const response = await fetch('/profile', {
+          headers: { 'Authorization': token }
+      });
+    
+        if (response.ok) {
+          const user = await response.json();
+          document.getElementById('username').innerText = `Username: ${user.username}`;
+          document.getElementById('email').innerText = `Email: ${user.email}`;
+          document.getElementById('bio').innerText = `Bio: ${user.bio}`;
+        } else {
+          alert('Error loading profile');
+          window.location.href = 'login.html';
+        }
+    });
+    
+    function selectProfilePic(src){
+        document.querySelectorAll('.picture-gallery img').forEach(img =>{
+          img.classList.remove('selected');
+        });
+    
+      const selectedImage = document.querySelector('.picture-gallery img[src="${src}"]');
+      selectedImage.classList.add('selected');
+    
+      // updating the profile picture in server
+      fetch('/updatedProfilePricture',{
+        method: 'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({profliePicture:src})
+      }).then(response => {
+          if(response.ok){
+            document.getElementById('profile-photo').src=src;
+          }else{
+            alert('Error updating profile picture');
+          }
+      });
+    }
+
   
   const workoutData = [];
   const eventData = [];
@@ -98,4 +145,3 @@ document.addEventListener('DOMContentLoaded', function () => {
     const itemWidth = eventItems[0].offsetWidth + 16; // Including margin
     eventsSlider.scrollLeft = currentSlide * itemWidth;
   }
-});

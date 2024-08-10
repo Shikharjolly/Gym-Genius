@@ -82,14 +82,24 @@ nav ul {
     gap: 1em;
 }
 
-
-.profile-photo{
-    width: 150px;
-    height: 150px;
-    border-radius: 505%;
-    object-fit: cover;
-    border: 2px solid #ddd;
+.picture-gallery{
+    display: flex;
+    gap: 10px;
 }
+
+.picture-gallery img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    cursor: pointer;
+    object-fit: cover;
+    border: 2px solid transparent;
+}
+
+.picture-gallery img.selected{
+    border-color: #007bff;
+}
+
 .profile-info{
     max-width: 500px;
 }
@@ -102,21 +112,6 @@ nav ul {
 .profile-info p{
     margin-top: 0.5em;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 main {
     padding: 2em;
