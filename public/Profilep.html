@@ -51,6 +51,7 @@
       <p id="username">Loading...</p>
       <p id="email"></p>
       <p id="bio"></p>
+      <p id="account-balance"></p>
       <a href="login.html" id="logout">Logout</a>  
      </div>
     </div>
@@ -94,6 +95,7 @@
 </main>
 <!-- <script src="profile.js"></script> -->
 <script>
+  
  
   document.addEventListener('DOMContentLoaded', async () => {
    
@@ -103,7 +105,6 @@
       return;
     }
 
-      // Fetch profile data
   const response = await fetch('/profile', {
       headers: { 'Authorization': token }
   });
@@ -113,6 +114,7 @@
       document.getElementById('username').innerText = `Username: ${user.username}`;
       document.getElementById('email').innerText = `Email: ${user.email}`;
       document.getElementById('bio').innerText = `Bio: ${user.bio}`;
+      document.getElementById('account-balance').innerText = `Account Balance: ${user.accountBalance}`;
     } else {
       alert('Error loading profile');
       window.location.href = 'login.html';
@@ -146,7 +148,23 @@ function fetchEvents() {
 }
 function bookEvent(id) {
     fetch(`/api/book/${id}`, { method: 'PUT' })
-        .then(() => fetchEvents());
+        .then(async function() {
+          fetchEvents();
+          const balanceElement = document.getElementById('account-balance');
+          let currentBalance = parseFloat(balanceElement.innerText);
+            if (isNaN(currentBalance)) {
+                currentBalance = 0;
+            }
+
+            // Increment the balance by 10
+            currentBalance += 10;
+
+            // Update the balance in the HTML element
+            balanceElement.innerText = currentBalance;
+        });
+
+  
+
 }
 
 

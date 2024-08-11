@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 
 
 // copy and paste the following link to browser:
-// http://localhost:2000/event.html
+// http://localhost:2000
 
 
 const app = express();
@@ -35,7 +35,8 @@ const userSchema = new mongoose.Schema({
         username: { type: String, unique: true, required: true },
         email: { type: String, unique: true, required: true },
         password: { type: String, required: true },
-        bio: { type: String }
+        bio: { type: String },
+        accountBalance: { type: Number, default: 0 } 
     });
     
     const User = mongoose.model('User', userSchema);
@@ -80,7 +81,7 @@ const userSchema = new mongoose.Schema({
         jwt.verify(token, jwtSecret, async (err, decoded) => {
             if (err) return res.status(401).send('Invalid token');
             try {
-                const user = await User.findById(decoded.id).select('username email bio');
+                const user = await User.findById(decoded.id).select('username email bio accountBalance');
                 if (!user) return res.status(404).send('User not found');
                 res.json(user);
             } catch (err) {
@@ -104,22 +105,22 @@ app.put('/api/book/:id', async (req, res) => {
     const eventId = req.params.id;
 
     try {
-        // Find the event by ID
+      
         const event = await gymEvent.findById(eventId);
 
         if (!event) {
             return res.status(404).json({ message: 'Event not found' });
         }
 
-        // Check current availability and ensure it's a valid number
+  
         if (event.availability <= 0) {
             return res.status(400).json({ message: 'Availability is already at zero' });
         }
 
-        // Decrement availability
+
         event.availability -= 1;
 
-        // Save the updated event
+    
         await event.save();
 
         res.json({ message: 'Availability updated', event });
