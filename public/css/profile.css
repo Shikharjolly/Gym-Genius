@@ -108,9 +108,9 @@ nav ul {
 .profile-info p{
     margin-top: 0.5em;
 }
-/* General section styling */
+
 .profile-text {
-    background-color: #f4f4f4; /* Light grey background */
+    background-color: #f4f4f4; 
     padding: 20px;
     border-radius: 8px;
     max-width: 600px;
@@ -118,7 +118,7 @@ nav ul {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Profile info container styling */
+
 .profile-info {
     text-align: center;
 }
@@ -141,7 +141,7 @@ nav ul {
     color: #666;
 }
 
-/* Logout link styling */
+
 #logout {
     display: inline-block;
     margin-top: 20px;

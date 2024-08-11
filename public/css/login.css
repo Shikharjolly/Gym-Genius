@@ -6,6 +6,14 @@ body {
     color: #f5f6f7;
     font-family: Tahoma;
     font-size: 16px;
+    background-image: 
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.581), rgba(0, 0, 0, 0.774)), 
+    url('../images/Gym-Genius-Logo.png'); 
+    
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    background-size: 500px 500px;
   }
   
   h1, p {
@@ -18,7 +26,11 @@ body {
     max-width: 500px;
     min-width: 300px;
     margin: 0 auto;
-    padding-bottom: 2em;
+    padding: 2em;
+    border: 1px white solid;
+    border-radius: 18px;
+    background-image: linear-gradient(to bottom right, rgba(0, 0, 0, 0.263),rgba(106, 106, 106, 0.213)); 
+    
   }
   
   fieldset {
@@ -66,6 +78,18 @@ body {
     border-color: white;
     min-width: 300px;
   }
+  button{
+    display: block;
+    width: 60%;
+    margin: 1em auto;
+    height: 2em;
+    font-size: 1.1rem;
+    background-color: #0e0e3a;
+    border-color: white;
+    min-width: 300px;
+    color: aliceblue;
+  
+  }
   
   input[type="file"] {
     padding: 1px 2px;
@@ -73,4 +97,5 @@ body {
   
   .inline{
     display: inline; 
-  }
+  } 
+  
