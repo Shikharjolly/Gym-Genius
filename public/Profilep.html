@@ -48,7 +48,7 @@
 <section>
   <section class = profile-text>
     <div class="profile-info">
-      <p id="username">Loading...</p>
+      <p id="username"></p>
       <p id="email"></p>
       <p id="bio"></p>
       <p id="account-balance"></p>
@@ -96,8 +96,10 @@
 <!-- <script src="profile.js"></script> -->
 <script>
   
+  
  
   document.addEventListener('DOMContentLoaded', async () => {
+  
    
   const token = localStorage.getItem('token');
     if (!token) {
@@ -123,6 +125,7 @@
     fetchEvents();
 });
 
+
 function fetchEvents() {
     fetch('/api/events')
         .then(response => response.json())
@@ -139,32 +142,53 @@ function fetchEvents() {
                         <p>Location: ${element.location}</p>
                         <p>Description: ${element.description}</p>
                         <p>Availability: ${element.availability}</p>
-                        <button id = "book-button" onclick="bookEvent('${element._id}')">Book Event</button>
+                        <button id = "book-button" onclick="bookEvent('${element._id}', '${element.availability}')">Book Event</button>
                        
                     </div>
                 `;
             });
         });
 }
-function bookEvent(id) {
+function bookEvent(id,availability) {
+
+
     fetch(`/api/book/${id}`, { method: 'PUT' })
         .then(async function() {
+         
           fetchEvents();
-          const balanceElement = document.getElementById('account-balance');
-          let currentBalance = parseFloat(balanceElement.innerText);
-            if (isNaN(currentBalance)) {
-                currentBalance = 0;
-            }
+          updateBalance(availability);
+         
+         
+         
+        })
 
-            // Increment the balance by 10
-            currentBalance += 10;
+        
 
-            // Update the balance in the HTML element
-            balanceElement.innerText = currentBalance;
-        });
+       
+
+}
+function updateBalance(availability){
+ 
+  const name = document.getElementById('username').innerText;
+
+
+
+
+const [label,value ] = name.split(':').map(part => part.trim());
+
+fetch(`/api/add/${value}`, {
+  method: 'PUT',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({ availability })
+});
 
   
+  location.reload();
 
+
+  
 }
 
 

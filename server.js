@@ -89,7 +89,32 @@ const userSchema = new mongoose.Schema({
             }
         });
     });
+    app.put('/api/add/:name', async (req, res) => {
+        const { name } = req.params;
+        const { availability } = req.body;
     
+      
+    
+        try {
+          
+            const user = await User.findOne({ username: name }); 
+            if (!user) {
+                return res.status(404).json({ error: 'User not found' });
+            }
+    
+        
+            if (availability > 0) {
+             
+                user.accountBalance += 10;
+                await user.save();
+            }
+    
+            res.status(200).json({ message: 'Account balance updated', user });
+        } catch (error) {
+            console.error('Error updating account balance:', error);
+            res.status(500).json({ error: 'Internal server error' });
+        }
+    });
 
 const gymEventSchema = new mongoose.Schema({
     name: { type: String, required: true },
