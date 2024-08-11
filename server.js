@@ -95,11 +95,39 @@ const gymEventSchema = new mongoose.Schema({
     date: { type: Date, required: true },
     location: { type: String, required: true },
     description: { type: String },
-    availability: { type : String, default: '25'}
+    availability: { type : Number, default: '25'}
 });
 
 const gymEvent = mongoose.model('Event', gymEventSchema);
 
+app.put('/api/book/:id', async (req, res) => {
+    const eventId = req.params.id;
+
+    try {
+        // Find the event by ID
+        const event = await gymEvent.findById(eventId);
+
+        if (!event) {
+            return res.status(404).json({ message: 'Event not found' });
+        }
+
+        // Check current availability and ensure it's a valid number
+        if (event.availability <= 0) {
+            return res.status(400).json({ message: 'Availability is already at zero' });
+        }
+
+        // Decrement availability
+        event.availability -= 1;
+
+        // Save the updated event
+        await event.save();
+
+        res.json({ message: 'Availability updated', event });
+    } catch (error) {
+        console.error('Error updating availability:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
 
 
 app.get('/api/events', async (req, res) => {
@@ -125,6 +153,9 @@ app.put('/api/events/:id', async (req, res) => {
        
   
 });
+
+
+
 
 app.delete('/api/events/:id', async (req, res) => {
    
