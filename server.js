@@ -115,6 +115,26 @@ const userSchema = new mongoose.Schema({
             res.status(500).json({ error: 'Internal server error' });
         }
     });
+    app.delete('/api/clearbalance/:name', async (req, res) => {
+        const { name } = req.params; // Get the username from the route parameter
+      
+        try {
+          // Find the user by username
+          const user = await User.findOne({ username: name });
+      
+          if (user) {
+            // Clear the user's balance
+            user.accountBalance = 0;
+            await user.save(); // Save the updated user
+      
+            res.status(200).json({ message: `The balance for user ${name} has been cleared.` });
+          } else {
+            res.status(404).json({ message: 'User not found' });
+          }
+        } catch (error) {
+          res.status(500).json({ error: 'An error occurred while clearing the balance' });
+        }
+      });
 
 const gymEventSchema = new mongoose.Schema({
     name: { type: String, required: true },

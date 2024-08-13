@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Page</title>
+  <link rel="stylesheet" href="./css/profile.css">
+</head>
+<body>
+  <header>
+    <nav>
+        <div id ="nav-container">
+            <h1>GymGenius</h1>
+            <ul>
+                <li class = "nav-element"><a class = "nav-link" href="http://localhost:2000/home.html">Home</a></li> 
+                <li class = "nav-element"><a class = "nav-link" href="http://localhost:2000/Profilep.html">Profile</a></li>
+                <li class = "nav-element"><a class = "nav-link" href="http://localhost:2000/event.html">Events</a></li>
+                <li class = "nav-element"><a class = "nav-link" href="http://localhost:2000/Workout.html">Workouts</a></li>
+            </ul>
+        </div>
+    </nav> 
+    <section id="home" class="heading-banner">
+        <div class="banner-content">
+            <h2>The Smarter Way to Pay for your Workouts!</h2> 
+        </div>
+    </section>
+</header>
+   
+<div class="content-wrapper">
+  <section class="profile">
+    <div class = "profile-content">
+    
+      </div>
+  </section>
+</div>
+<section>
+    <section class = profile-text>
+      <div class="profile-info">
+        <p id="username"></p>
+        <p id="email"></p>
+        <p id="bio"></p>
+        <p id="account-balance"></p>
+        <button id = "pay-button">Pay Balance</button> 
+       </div>
+      </div>
+    </section>
+  
+  </section>
+  <script>
+     document.addEventListener('DOMContentLoaded', async () => {
+  
+   
+  const token = localStorage.getItem('token');
+    if (!token) {
+      window.location.href = 'login.html';
+      return;
+    }
+
+  const response = await fetch('/profile', {
+      headers: { 'Authorization': token }
+  });
+
+    if (response.ok) {
+      const user = await response.json();
+      document.getElementById('username').innerText = `Username: ${user.username}`;
+      document.getElementById('email').innerText = `Email: ${user.email}`;
+      document.getElementById('bio').innerText = `Bio: ${user.bio}`;
+      document.getElementById('account-balance').innerText = `Account Balance: ${user.accountBalance}`;
+    } else {
+      alert('Error loading profile');
+      window.location.href = 'login.html';
+    }
+
+ 
+});
+document.getElementById("pay-button").addEventListener('click', payBalance);
+
+function payBalance  (){
+
+    const [nameLabel,name ] = document.getElementById('username').innerText.split(':').map(part => part.trim());
+    const [balanceLabel,balance ] = document.getElementById('account-balance').innerText.split(':').map(part => part.trim());
+
+   
+  
+
+    fetch(`/api/clearbalance/${name}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+
+
+  
+  location.reload();
+  alert('Account Balance cleared');
+    
+}
+  </script>
+  </body>
+  </html>
+  
