@@ -88,14 +88,7 @@
         <button type="button" onclick="addEvent()"><a href="event.html">Add Events</a></button>
      
       </form>
-<!--       <div class="events-slider" id="events-slider">
-         Events will be added here
-      </div>
-      <div class="events-nav">
-        <button onclick="prevSlide()">Previous</button>
-        <button onclick="nextSlide()">Next</button>
-      </div> 
-    -->
+
     <div id="event-list">
     
 
@@ -192,17 +185,11 @@ function bookEvent(id,availability) {
          
         })
 
-        
-
-       
 
 }
 function updateBalance(availability){
  
-  const name = document.getElementById('username').innerText;
-
-
-
+const name = document.getElementById('username').innerText;
 
 const [label,value ] = name.split(':').map(part => part.trim());
 
