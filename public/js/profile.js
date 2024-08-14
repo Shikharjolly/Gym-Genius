@@ -36,7 +36,7 @@ const { response } = require("express");
         }
 
         fetchEvents();
-        fetechWorkouts();
+        fetchWorkouts();
         
     });
     document.addEventListener('DOMContentLoaded', () => {
@@ -209,7 +209,7 @@ const { response } = require("express");
       localStorage.setItem('workouts', JSON.stringify(workouts));
     }
   }
-  // Fetch and display saved workouts
+ 
 function fetchWorkouts() {
   const token = localStorage.getItem('token');
   fetch('/api/workouts', {
