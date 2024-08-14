@@ -200,15 +200,29 @@ section {
     background: #f9f9f9;
     border-radius: 8px;
 }
-
+.flex-container{
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+}
+#workout-form{
+    flex: 1;
+    max-width: 45%;
+    box-sizing: border-box;
+}
 .workout-form, .event-form {
     margin-bottom: 1em;
 }
 
 #workout-list {
-    list-style-type: none;
+   flex: 1;
+   max-width: 45%;
+   box-sizing: border-box;
+}
+
+#workout-list ul{
+    list-style-type:none;
     padding: 0;
-    width: 100%;
 }
 
 #workout-list li {
