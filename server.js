@@ -36,9 +36,8 @@ const upload = multer({
     }
 });
 
-if (!fs.existsSync('uploads')){
-    fs.mkdirSync('uploads');
-}
+//if (!fs.existsSync('uploads')){
+   // fs.mkdirSync('uploads');}
 
 
 mongoose.connect('mongodb+srv://movieguy3333:Eg3csWV4A@testapicluster.qmp6iba.mongodb.net/?retryWrites=true&w=majority&appName=TestApiCluster');

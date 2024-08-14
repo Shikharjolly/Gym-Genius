@@ -41,7 +41,7 @@ const { response } = require("express");
     });
     document.addEventListener('DOMContentLoaded', () => {
       const form = document.getElementById('uploadForm');
-      const profileImage = document.getElementById('profileImage');
+      const profileImage = document.getElementById('profile-photo');
   
       form.addEventListener('submit', async (event) => {
           event.preventDefault();
@@ -92,16 +92,16 @@ const { response } = require("express");
   }
     
   function selectProfilePic(src) {
-    document.querySelectorAll('.picture-gallery img').forEach(img => {
+    document.querySelectorAll('.picture-photo img').forEach(img => {
         img.classList.remove('selected');
     });
 
     // Add 'selected' class to the clicked image
-    const selectedImage = document.querySelector(`.picture-gallery img[src="${src}"]`);
+    const selectedImage = document.querySelector(`.picture-photo img[src="${src}"]`);
     selectedImage.classList.add('selected');
 
     // Update profile photo
-    document.getElementById('profileImage').src = src;
+    document.getElementById('profile-photo').src = src;
 
     // Optionally, send the new profile picture to the server
     fetch('/api/updateProfilePicture', {
@@ -180,6 +180,7 @@ const { response } = require("express");
     const itemWidth = eventItems[0].offsetWidth + 16; // Including margin
     eventsSlider.scrollLeft = currentSlide * itemWidth;
   }
+
   const form = document.getElementById('workout-form');
   const workoutList = document.getElementById('workout-list');
   

@@ -28,26 +28,21 @@
    
 <div class="content-wrapper">
   <section class="profile">
-    <div class="profile">
+    <div class="profile-info">
       <h1>User Profile</h1>
+      <img id="profileImage" src="../public/images/Gym-Genius-Logo.png"/>
       <form id="uploadForm" enctype="multipart/form-data">
           <label for="profilePicture">Upload Profile Picture:</label>
           <input type="file" id="profilePicture" name="profilePicture" accept="image/*">
           <button type="submit">Upload</button>
       </form>
-      <img id="profile-photo" src="../public/images/Gym-Genius-Logo.png" alt="Profile Photo" />
-  </div>
-<section>
-  <section class = profile-text>
-    <div class="profile-info">5tn
       <p id="username"></p>
       <p id="email"></p>
       <p id="bio"></p>
       <p id="account-balance"></p>
       <a href="http://localhost:2000/login.html" id="logout">Logout</a>  
-      <a href="http://localhost:2000/checkout.html" id="checkout"></a>Checkout</a>  
+      <a href="http://localhost:2000/checkout.html" id="checkout">Checkout</a>  
     </div>
-  </section>
 </section>
 
 <main>
@@ -84,7 +79,7 @@
     </section>
   </div>
 </main>
-<!-- <script src="profile.js"></script> -->
+<script src="profile.js"></script>
 <script>
   
   
@@ -112,11 +107,11 @@
       alert('Error loading profile');
       window.location.href = 'login.html';
     }
-    fetchWorkouts();
+    //fetchWorkouts();
     fetchEvents();
 });
 
-function fetchWorkouts() {
+/**function fetchWorkouts() {
       fetch('/api/workouts')
         .then(response => response.json())
         .then(workouts => {
@@ -134,7 +129,7 @@ function fetchWorkouts() {
             `;
           });
         });
-    }
+    }*/
 
 
 function fetchEvents() {

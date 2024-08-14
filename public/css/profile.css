@@ -40,10 +40,7 @@ nav ul {
 .nav-element:hover {
     opacity: 1;
     background-color: rgb(29, 29, 29);
-   
-   
 }
-
 
 .nav-link{
     color: #fff;
@@ -57,19 +54,55 @@ nav ul {
     text-shadow: 3px 3px 12px rgb(0, 0, 0);
 }
 
-.button {
-    display: inline-block;
-    background: #a20101;
-    color: #fff;
-    padding: 0.5em 1em;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
 .profile{
     padding: 1em;
     background: #f9f9f9;
     border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 500px;
+    margin: 2em auto;
+}
+
+.profile img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid ;
+    margin-bottom: 1em;
+}
+.profile h1 {
+    font-size: 1.8em;
+    margin-bottom: 1em;
+}
+
+.profile form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile form label{
+    margin-bottom: 0.5em;
+}
+.profile form label[type ="file"]{
+    margin-bottom: 1em;
+}
+.profile form button {
+    padding: 0.5em 1em;
+    background-color: red;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.profile form button:hover {
+    background-color: #0056b3;
 }
 
 .profile-content{
@@ -78,40 +111,9 @@ nav ul {
     gap: 1em;
 }
 
-.profile-pic{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#profile-photo{
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #007bff;
-    margin-bottom: 20px;
-}
-.picture-gallery{
-    display: flex;
-    gap: 10px;
-}
-
-.picture-gallery img{
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    cursor: pointer;
-    object-fit: cover;
-    border: 2px solid transparent;
-}
-
-.picture-gallery img.selected{
-    border-color: #007bff;
-}
-
 .profile-info{
     max-width: 500px;
+    text-align: center;
 }
 
 .profile-info h3{
@@ -123,18 +125,13 @@ nav ul {
     margin-top: 0.5em;
 }
 
-/*.profile-text {
+.profile-text {
     background-color: #f4f4f4; 
     padding: 20px;
     border-radius: 8px;
     max-width: 600px;
     margin: 20px auto;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}*/
-
-
-.profile-info {
-    text-align: center;
 }
 
 #username {
@@ -178,12 +175,12 @@ main {
     padding: 2em;
     background-color:black;
     background-image: 
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8)), 
-    url('../images/Gym-Genius-Logo.png');
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8)), 
+        url('../images/Gym-Genius-Logo.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center; 
-    background-size: 500px 500px;
+    background-size: cover;
 }
 
 
@@ -191,6 +188,7 @@ main {
     display: flex;
     justify-content: space-between;
     gap: 2em; 
+    flex-wrap: wrap;
 }
 
 section {
