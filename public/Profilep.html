@@ -79,8 +79,13 @@
     </section>
   </div>
 </main>
-<script src="profile.js"></script>
-<script>
+<footer>
+      
+  <p>Thank you for choosing GymGenius</p>
+
+</footer>
+<script src="profile.js"></script> 
+ <script>
   
   
  
@@ -102,7 +107,7 @@
       document.getElementById('username').innerText = `Username: ${user.username}`;
       document.getElementById('email').innerText = `Email: ${user.email}`;
       document.getElementById('bio').innerText = `Bio: ${user.bio}`;
-      document.getElementById('account-balance').innerText = `Account Balance: ${user.accountBalance}`;
+      document.getElementById('account-balance').innerText = `Account Balance: $${user.accountBalance}`;
     } else {
       alert('Error loading profile');
       window.location.href = 'login.html';
@@ -176,6 +181,7 @@ const name = document.getElementById('username').innerText;
 
 const [label,value ] = name.split(':').map(part => part.trim());
 
+
 fetch(`/api/add/${value}`, {
   method: 'PUT',
   headers: {
@@ -201,7 +207,6 @@ function selectProfilePic(src){
   const selectedImage = document.querySelector('.picture-gallery img[src="${src}"]');
   selectedImage.classList.add('selected');
 
-  // updating the profile picture in server
   fetch('/updatedProfilePricture',{
     method: 'POST',
     headers:{'Content-Type':'application/json'},
@@ -215,6 +220,7 @@ function selectProfilePic(src){
   });
 }
 
-</script>
+
+</script> 
 </body>
 </html>

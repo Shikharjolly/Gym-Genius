@@ -15,7 +15,6 @@
                 <li class = "nav-element"><a class = "nav-link" href="http://localhost:2000/home.html">Home</a></li> 
                 <li class = "nav-element"><a class = "nav-link" href="http://localhost:2000/Profilep.html">Profile</a></li>
                 <li class = "nav-element"><a class = "nav-link" href="http://localhost:2000/event.html">Events</a></li>
-                <li class = "nav-element"><a class = "nav-link" href="http://localhost:2000/Workout.html">Workouts</a></li>
             </ul>
         </div>
     </nav> 
@@ -41,6 +40,7 @@
         <p id="bio"></p>
         <p id="account-balance"></p>
         <button id = "pay-button">Pay Balance</button> 
+        <button id = "profile-button">Profile</button> 
        </div>
       </div>
     </section>
@@ -73,8 +73,12 @@
 
  
 });
+document.getElementById('profile-button').addEventListener('click',backToProfile );
 document.getElementById("pay-button").addEventListener('click', payBalance);
 
+function backToProfile(){
+  window.location.href = "http://localhost:2000/Profilep.html";
+}
 function payBalance  (){
 
     const [nameLabel,name ] = document.getElementById('username').innerText.split(':').map(part => part.trim());
