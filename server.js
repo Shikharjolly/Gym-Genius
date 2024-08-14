@@ -212,7 +212,60 @@ app.delete('/api/events/:id', async (req, res) => {
       
    
 });
+// Define Workout schema and model
+// Define Workout schema and model
+const workoutSchema = new mongoose.Schema({
+    name: String,
+    date: Date,
+    location: String,
+    description: String,
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' } // Reference to User
+});
 
+const Workout = mongoose.model('Workout', workoutSchema);
+
+  
+  app.use(cors());
+  app.use(bodyParser.json());
+  
+  // POST endpoint to save a new workout
+  app.post('/api/workouts', async (req, res) => {
+    const token = req.headers['authorization'];
+    if (!token) return res.status(401).send('No token provided');
+
+    jwt.verify(token, jwtSecret, async (err, decoded) => {
+        if (err) return res.status(401).send('Invalid token');
+        
+        try {
+            const workout = new Workout({
+                ...req.body,
+                user: decoded.id // Associate workout with the user
+            });
+            await workout.save();
+            res.status(201).json(workout);
+        } catch (err) {
+            res.status(500).send('Error creating workout');
+        }
+    });
+});
+  
+// GET endpoint to fetch all workouts for the authenticated user
+app.get('/api/workouts', async (req, res) => {
+    const token = req.headers['authorization'];
+    if (!token) return res.status(401).send('No token provided');
+
+    jwt.verify(token, jwtSecret, async (err, decoded) => {
+        if (err) return res.status(401).send('Invalid token');
+        
+        try {
+            const workouts = await Workout.find({ user: decoded.id });
+            res.json(workouts);
+        } catch (err) {
+            res.status(500).send('Error fetching workouts');
+        }
+    });
+});
+  
 
 app.use(express.static(path.join(__dirname, 'public')));
 

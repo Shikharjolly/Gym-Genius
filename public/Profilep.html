@@ -15,7 +15,7 @@
                 <li class = "nav-element"><a class = "nav-link" href="http://localhost:2000/home.html">Home</a></li> 
                 <li class = "nav-element"><a class = "nav-link" href="http://localhost:2000/Profilep.html">Profile</a></li>
                 <li class = "nav-element"><a class = "nav-link" href="http://localhost:2000/event.html">Events</a></li>
-                <li class = "nav-element"><a class = "nav-link" href="http://localhost:2000/Workout.html">Workouts</a></li>
+                
             </ul>
         </div>
     </nav> 
@@ -65,13 +65,22 @@
     <section class="workouts">
       <h2>Manage Your Workouts</h2>
       <div class="flex-container">
-        <form class="workout-form">
-          <input type="text" id="workout-input" placeholder="Add a new workout">
-          <button type="button" onclick="addWorkout()"><a href="Workout.html">Add Workout</a></button>
+        <form id="workout-form">
+          <input type="hidden" id="workout-id">
+          <label for="name">Workout Name:</label>
+          <input type="text" id="name" required>
+          <label for="date">Date:</label>
+          <input type="date" id="date" required>
+          <label for="location">Location:</label>
+          <input type="text" id="location" required>
+          <label for="description">Description:</label>
+          <textarea id="description"></textarea>
+          <button type="submit" id="submit-button">Save</button>
         </form>
-        <ul id="workout-list"></ul>
+        <div id="workout-list"></div>
       </div>
     </section>
+    
     <section class="events">
       <h2>Upcoming Gym Events</h2>
       <form class="event-form">
@@ -122,9 +131,29 @@
       alert('Error loading profile');
       window.location.href = 'login.html';
     }
-
+    fetchWorkouts();
     fetchEvents();
 });
+
+function fetchWorkouts() {
+      fetch('/api/workouts')
+        .then(response => response.json())
+        .then(workouts => {
+          const workoutList = document.getElementById('workout-list');
+          workoutList.innerHTML = '';
+          workouts.forEach(workout => {
+            workoutList.innerHTML += `
+              <div class="workout-item">
+                <h3>Workout: ${workout.name}</h3>
+                <p>ID: ${workout._id}</p>
+                <p>Date Completed: ${new Date(workout.date).toLocaleDateString()}</p>
+                <p>Location: ${workout.location}</p>
+                <p>Description: ${workout.description}</p>
+              </div>
+            `;
+          });
+        });
+    }
 
 
 function fetchEvents() {

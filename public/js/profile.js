@@ -10,7 +10,7 @@ const { response } = require("express");
       document.getElementById('profile-bio').textContent = user.bio || 'No bio available'
     });*/
   
-   
+   // Profile and event fetching code
     document.addEventListener('DOMContentLoaded', async () => {
    
       const token = localStorage.getItem('token');
@@ -35,6 +35,8 @@ const { response } = require("express");
         }
 
         fetchEvents();
+        fetechWorkouts();
+        
     });
 
     function fetchEvents() {
@@ -59,8 +61,6 @@ const { response } = require("express");
               });
           });
   }
-
-    
     
     function selectProfilePic(src){
         document.querySelectorAll('.picture-gallery img').forEach(img =>{
@@ -84,40 +84,12 @@ const { response } = require("express");
       });
     }
 
+
   
-  const workoutData = [];
   const eventData = [];
   let currentSlide = 0;
 
 
-  window.addWorkout = function() {
-    const workoutInput = document.getElementById('workout-input');
-    const workout = workoutInput.value.trim();
-    if (workout) {
-      workoutData.push(workout);
-      renderWorkouts();
-      workoutInput.value = '';
-    }
-  };
-
-  
-  window.deleteWorkout = function(index) {
-    workoutData.splice(index, 1);
-    renderWorkouts();
-  };
-
-  
-  function renderWorkouts() {
-    const workoutList = document.getElementById('workout-list');
-    workoutList.innerHTML = '';
-    workoutData.forEach((workout, index) => {
-      const li = document.createElement('li');
-      li.innerHTML = `
-        ${workout} <button onclick="deleteWorkout(${index})">Delete</button>
-      `;
-      workoutList.appendChild(li);
-    });
-  }
 
   
   window.addEvent = function() {
@@ -172,3 +144,60 @@ const { response } = require("express");
     const itemWidth = eventItems[0].offsetWidth + 16; // Including margin
     eventsSlider.scrollLeft = currentSlide * itemWidth;
   }
+  const form = document.getElementById('workout-form');
+  const workoutList = document.getElementById('workout-list');
+  
+  if (form) {
+    // Fetch and display saved workouts
+    fetchWorkouts();
+  
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+  
+      const workout = {
+        name: document.getElementById('name').value,
+        date: document.getElementById('date').value,
+        location: document.getElementById('location').value,
+        description: document.getElementById('description').value
+      };
+  
+      saveWorkout(workout);
+      fetchWorkouts();
+      form.reset();
+    });
+  
+    function saveWorkout(workout) {
+      let workouts = JSON.parse(localStorage.getItem('workouts')) || [];
+      workouts.push(workout);
+      localStorage.setItem('workouts', JSON.stringify(workouts));
+    }
+  
+  // Fetch and display saved workouts
+function fetchWorkouts() {
+  const token = localStorage.getItem('token');
+  fetch('/api/workouts', {
+      headers: { 'Authorization': token }
+  })
+  .then(response => response.json())
+  .then(workouts => {
+      workoutList.innerHTML = '';
+      workouts.forEach(workout => {
+          workoutList.innerHTML += `
+              <div class="workout-item">
+                  <h3>${workout.name}</h3>
+                  <p>Date: ${new Date(workout.date).toLocaleDateString()}</p>
+                  <p>Location: ${workout.location}</p>
+                  <p>Description: ${workout.description}</p>
+              </div>
+          `;
+      });
+  });
+}
+
+  }
+
+
+
+
+
+
