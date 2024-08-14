@@ -224,7 +224,7 @@ app.put('/api/book/:id', async (req, res) => {
     }
 });
 
-
+/* 
 app.get('/api/events', async (req, res) => {
    
         const events = await gymEvent.find();
@@ -260,9 +260,59 @@ app.delete('/api/events/:id', async (req, res) => {
 
       
    
+}); */
+app.get('/api/events', async (req, res) => {
+    try {
+        const events = await gymEvent.find();
+        res.json(events);
+    } catch (err) {
+        console.error('Error fetching events:', err);
+        res.status(500).json({ message: 'Server error while fetching events' });
+    }
 });
-// Define Workout schema and model
-// Define Workout schema and model
+
+app.post('/api/events', async (req, res) => {
+    try {
+        const event = new gymEvent(req.body);
+        await event.save();
+        res.status(201).json(event);
+    } catch (err) {
+        console.error('Error creating event:', err);
+        res.status(400).json({ message: 'Invalid data provided' });
+    }
+});
+
+app.put('/api/events/:id', async (req, res) => {
+    try {
+        const event = await gymEvent.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        
+        if (!event) {
+            return res.status(404).json({ message: 'Event not found' });
+        }
+        
+        res.json(event);
+    } catch (err) {
+        console.error('Error updating event:', err);
+        res.status(400).json({ message: 'Invalid data provided' });
+    }
+});
+
+app.delete('/api/events/:id', async (req, res) => {
+    try {
+        const result = await gymEvent.findByIdAndDelete(req.params.id);
+        
+        if (!result) {
+            return res.status(404).json({ message: 'Event not found' });
+        }
+        
+        res.status(204).end(); // No content to return
+    } catch (err) {
+        console.error('Error deleting event:', err);
+        res.status(500).json({ message: 'Server error while deleting event' });
+    }
+});
+
+
 const workoutSchema = new mongoose.Schema({
     name: String,
     date: Date,
@@ -276,8 +326,7 @@ const Workout = mongoose.model('Workout', workoutSchema);
   
   app.use(cors());
   app.use(bodyParser.json());
-  
-  // POST endpoint to save a new workout
+
   app.post('/api/workouts', async (req, res) => {
     const token = req.headers['authorization'];
     if (!token) return res.status(401).send('No token provided');
