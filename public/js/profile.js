@@ -1,6 +1,6 @@
 const { response } = require("express");
 
-/*
+/** 
   
   fetch('/user/123')
     .then(response => response.json())
@@ -29,6 +29,7 @@ const { response } = require("express");
           document.getElementById('username').innerText = `Username: ${user.username}`;
           document.getElementById('email').innerText = `Email: ${user.email}`;
           document.getElementById('bio').innerText = `Bio: ${user.bio}`;
+          document.getElementById('profileImage'). src =user.profilePicture ||'default-profile.png';
         } else {
           alert('Error loading profile');
           window.location.href = 'login.html';
@@ -38,7 +39,35 @@ const { response } = require("express");
         fetechWorkouts();
         
     });
-
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('uploadForm');
+      const profileImage = document.getElementById('profileImage');
+  
+      form.addEventListener('submit', async (event) => {
+          event.preventDefault();
+  
+          const formData = new FormData(form);
+          const token = localStorage.getItem('token'); // Adjust token retrieval as needed
+  
+          try {
+              const response = await fetch('/api/updateProfilePicture', {
+                  method: 'POST',
+                  headers: {
+                      'Authorization': `Bearer ${token}`
+                  },
+                  body: formData
+              });
+  
+              if (!response.ok) throw new Error('Failed to upload image');
+  
+              const result = await response.json();
+              profileImage.src = result.profilePictureUrl; // Update image source with the URL returned from the server
+  
+          } catch (error) {
+              console.error('Error uploading profile picture:', error);
+          }
+      });
+  });
     function fetchEvents() {
       fetch('/api/events')
           .then(response => response.json())
@@ -62,36 +91,43 @@ const { response } = require("express");
           });
   }
     
-    function selectProfilePic(src){
-        document.querySelectorAll('.picture-gallery img').forEach(img =>{
-          img.classList.remove('selected');
-        });
-    
-      const selectedImage = document.querySelector('.picture-gallery img[src="${src}"]');
-      selectedImage.classList.add('selected');
-    
-      // updating the profile picture in server
-      fetch('/updatedProfilePricture',{
+  function selectProfilePic(src) {
+    document.querySelectorAll('.picture-gallery img').forEach(img => {
+        img.classList.remove('selected');
+    });
+
+    // Add 'selected' class to the clicked image
+    const selectedImage = document.querySelector(`.picture-gallery img[src="${src}"]`);
+    selectedImage.classList.add('selected');
+
+    // Update profile photo
+    document.getElementById('profileImage').src = src;
+
+    // Optionally, send the new profile picture to the server
+    fetch('/api/updateProfilePicture', {
         method: 'POST',
-        headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({profliePicture:src})
-      }).then(response => {
-          if(response.ok){
-            document.getElementById('profile-photo').src=src;
-          }else{
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({ profilePicture: src })
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Profile picture updated successfully');
+        } else {
             alert('Error updating profile picture');
-          }
-      });
-    }
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
 
 
-  
   const eventData = [];
   let currentSlide = 0;
 
-
-
-  
   window.addEvent = function() {
     const eventInput = document.getElementById('event-input');
     const event = eventInput.value.trim();
@@ -171,7 +207,7 @@ const { response } = require("express");
       workouts.push(workout);
       localStorage.setItem('workouts', JSON.stringify(workouts));
     }
-  
+  }
   // Fetch and display saved workouts
 function fetchWorkouts() {
   const token = localStorage.getItem('token');
@@ -193,11 +229,3 @@ function fetchWorkouts() {
       });
   });
 }
-
-  }
-
-
-
-
-
-

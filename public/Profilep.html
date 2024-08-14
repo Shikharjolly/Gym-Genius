@@ -28,26 +28,18 @@
    
 <div class="content-wrapper">
   <section class="profile">
-    <div class = "profile-content">
-      <section class="profile-pic"><!--all images were used from https://unsplash.com/s/photos/workout-->
-        <div class ="picture-gallery">
-        <img src="images/bodybuild.jpg" alt="bodybuild" onclick="selectProfilePic('../images/bodybuild.jpg')">
-        <img src="images/dumbell2.jpg" alt="dumbbell1" onclick="selectProfilePic('../images/dumbbell2.jpg')">
-        <img src="images/dumbells1.jpg" alt="dumbbell2" onclick="selectProfilePic('../images/dumbbell2.jpg')">
-        <img src="images/kettleball1.jpg" alt="kettleball1" onclick="selectProfilePic('../images/kettleball1.jpg')">
-        <img src="images/kettleball2.jpg" alt="kettleball2" onclick="selectProfilePic('../images/kettleball2.jpg')">
-        <img src="images/openswim.jpg" alt="openswim" onclick="selectProfilePic('../images/openswimjpg')">
-        <img src="images/yogalake.jpg" alt="yogalake" onclick="selectProfilePic('../images/yogalake.jpg')">
-        
-        </div>
-        
-      </section>
-      </div>
-  </section>
-</div>
+    <div class="profile">
+      <h1>User Profile</h1>
+      <form id="uploadForm" enctype="multipart/form-data">
+          <label for="profilePicture">Upload Profile Picture:</label>
+          <input type="file" id="profilePicture" name="profilePicture" accept="image/*">
+          <button type="submit">Upload</button>
+      </form>
+      <img id="profile-photo" src="../public/images/Gym-Genius-Logo.png" alt="Profile Photo" />
+  </div>
 <section>
   <section class = profile-text>
-    <div class="profile-info">
+    <div class="profile-info">5tn
       <p id="username"></p>
       <p id="email"></p>
       <p id="bio"></p>

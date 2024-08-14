@@ -5,6 +5,9 @@ const cors = require('cors');
 const path = require('path');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const multer = require('multer');
+const fs= require('fs');
+
 
 
 // copy and paste the following link to browser:
@@ -12,17 +15,30 @@ const jwt = require('jsonwebtoken');
 
 
 const app = express();
-
 const PORT = 2000;
 const jwtSecret = 'your_jwt_secret_key';
-const num = 23;
+//const num = 23;
 
 
 app.use(cors());
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+const upload = multer({
+    dest: 'uploads/',
+    limits: {fileSize: 5 * 1024 * 1024}, //limiting size to 5MB
+    fileFilter(req, file,cb){
+        if(!file.originalname.match(/\.(jpg|jpeg|png)$/)){
+            return cb(new Error('Please upload an image'));
+        }
+        cb(null,true);
+    }
+});
+
+if (!fs.existsSync('uploads')){
+    fs.mkdirSync('uploads');
+}
 
 
 mongoose.connect('mongodb+srv://movieguy3333:Eg3csWV4A@testapicluster.qmp6iba.mongodb.net/?retryWrites=true&w=majority&appName=TestApiCluster');
@@ -36,7 +52,8 @@ const userSchema = new mongoose.Schema({
         email: { type: String, unique: true, required: true },
         password: { type: String, required: true },
         bio: { type: String },
-        accountBalance: { type: Number, default: 0 } 
+        accountBalance: { type: Number, default: 0 },
+        profilePicture: { type: String } 
     });
     
     const User = mongoose.model('User', userSchema);
@@ -46,6 +63,39 @@ const userSchema = new mongoose.Schema({
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(express.static('public'));
     
+
+// Define the `updateUserProfilePicture` function
+const updateUserProfilePicture = async (userId, profilePicture) => {
+    try {
+        await User.findByIdAndUpdate(userId, { profilePicture });
+    } catch (err) {
+        throw new Error('Error updating profile picture');
+    }
+};
+app.post('/api/updateProfilePicture', upload.single('profilePicture'), async (req, res) => {
+    const token = req.headers['authorization'];
+    if (!token) return res.status(401).send('No token provided');
+
+    jwt.verify(token, jwtSecret, async (err, decoded) => {
+        if (err) return res.status(401).send('Invalid token');
+        
+        const userId = decoded.id;
+        const file = req.file;
+
+        if (!file) return res.status(400).send('No file uploaded');
+
+        const filePath = path.join('uploads', file.filename);
+        const fileUrl = `${req.protocol}://${req.get('host')}/uploads/${file.filename}`;
+
+        try {
+            await updateUserProfilePicture(userId, fileUrl);
+            res.status(200).json({ profilePictureUrl: fileUrl });
+        } catch (err) {
+            res.status(500).send('Error updating profile picture');
+        }
+    });
+});
+
 
     app.post('/signup', async (req, res) => {
         try {
