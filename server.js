@@ -48,22 +48,22 @@ const userSchema = new mongoose.Schema({
     app.use(express.static('public'));
     
 
-// Define the `updateUserProfilePicture` function// Set up storage with Multer
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, 'uploads/');
     },
     filename: function (req, file, cb) {
-      cb(null, Date.now() + path.extname(file.originalname)); // Append timestamp to filename
+      cb(null, Date.now() + path.extname(file.originalname));
     }
   });
   
   const upload = multer({ storage: storage });
   
-  // Serve static files from the 'uploads' directory
+
   app.use('/uploads', express.static('uploads'));
   
-  // Endpoint to handle file uploads
+
   app.post('/upload', upload.single('image'), (req, res) => {
     res.json({ filePath: `/uploads/${req.file.filename}` });
   });
@@ -139,16 +139,15 @@ const storage = multer.diskStorage({
         }
     });
     app.delete('/api/clearbalance/:name', async (req, res) => {
-        const { name } = req.params; // Get the username from the route parameter
-      
+        const { name } = req.params; 
         try {
-          // Find the user by username
+
           const user = await User.findOne({ username: name });
       
           if (user) {
-            // Clear the user's balance
+  
             user.accountBalance = 0;
-            await user.save(); // Save the updated user
+            await user.save(); 
       
             res.status(200).json({ message: `The balance for user ${name} has been cleared.` });
           } else {
@@ -198,43 +197,7 @@ app.put('/api/book/:id', async (req, res) => {
     }
 });
 
-/* 
-app.get('/api/events', async (req, res) => {
-   
-        const events = await gymEvent.find();
-        res.json(events);
 
-});
-
-app.post('/api/events', async (req, res) => {
- 
-        const event = new gymEvent(req.body);
-        await event.save();
-        res.status(201).json(event);
-  
-});
-
-app.put('/api/events/:id', async (req, res) => {
-   
-        const event = await gymEvent.findByIdAndUpdate(req.params.id, req.body, { new: true });
-       
-            res.json(event);
-       
-  
-});
-
-
-
-
-app.delete('/api/events/:id', async (req, res) => {
-   
-        const result = await gymEvent.findByIdAndDelete(req.params.id);
-       
-        
-
-      
-   
-}); */
 app.get('/api/events', async (req, res) => {
     try {
         const events = await gymEvent.find();
@@ -279,7 +242,7 @@ app.delete('/api/events/:id', async (req, res) => {
             return res.status(404).json({ message: 'Event not found' });
         }
         
-        res.status(204).end(); // No content to return
+        res.status(204).end(); 
     } catch (err) {
         console.error('Error deleting event:', err);
         res.status(500).json({ message: 'Server error while deleting event' });
@@ -289,15 +252,15 @@ app.delete('/api/events/:id', async (req, res) => {
 
 let workouts = [];
 
-// Handle POST requests to /submit-workout
+
 app.post('/submit-workout', (req, res) => {
     const workoutData = req.body;
     console.log('Received workout data:', workoutData);
 
-    // Add workout to the array
+
     workouts.push(workoutData);
 
-    // Respond with the updated list of workouts
+ 
     res.json({
         message: 'Workout data received successfully!',
         data: workouts

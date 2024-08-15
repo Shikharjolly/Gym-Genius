@@ -55,8 +55,11 @@ function saveEvent() {
             document.getElementById('event-form').reset();
             document.getElementById('event-id').value = '';
         });
-        if (button.innerText = "Edit Event")
+        if (button.innerText = "Edit Event"){
             button.innerText = "Save Event";
+            location.reload();
+
+        }
 }
 
 function deleteEvent(id) {

@@ -57,18 +57,7 @@ nav ul {
 }
 
 
-/* header {
-    background-color: #333;
-    color: white;
-    padding: 30px;
-    text-align: center;
-}
 
-a {
-    color: white;
-    text-decoration: none;
-    
-} */
 h2{
     margin-left: 41%;
 }
@@ -86,6 +75,7 @@ form {
     flex-direction: column;
     max-width: 600px;
     margin: auto;
+    margin-bottom: 10px;
 
    
 
@@ -119,7 +109,8 @@ button:hover {
 }
 
 .event-item {
-    border: 1px solid #ccc;
+    border: 2px rgb(230, 76, 16) inset;
+    background: #f9f9f9;
     padding: 20px;
     margin-bottom: 15px;
 }
