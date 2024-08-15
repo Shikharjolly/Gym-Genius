@@ -28,14 +28,6 @@
    
 <div class="content-wrapper">
   <section class="profile">
-<    <!--<div class="profile-info">
-      <h1>User Profile</h1>
-      <img id="profileImage" src="../public/images/Gym-Genius-Logo.png"/>
-      <form id="uploadForm" enctype="multipart/form-data">
-          <label for="profilePicture">Upload Profile Picture:</label>
-          <input type="file" id="profilePicture" name="profilePicture" accept="image/*">
-          <button type="submit">Upload</button>
-      </form>>-->
       <input type="file" id="fileInput" accept="image/*">
       <div id="imageContainer">
           <img id="uploadedImage" src="" alt="Uploaded Image">
@@ -120,26 +112,6 @@
     fetchEvents();
 });
 
-/**function fetchWorkouts() {
-      fetch('/api/workouts')
-        .then(response => response.json())
-        .then(workouts => {
-          const workoutList = document.getElementById('workout-list');
-          workoutList.innerHTML = '';
-          workouts.forEach(workout => {
-            workoutList.innerHTML += `
-              <div class="workout-item">
-                <h3>Workout: ${workout.name}</h3>
-                <p>ID: ${workout._id}</p>
-                <p>Date Completed: ${new Date(workout.date).toLocaleDateString()}</p>
-                <p>Location: ${workout.location}</p>
-                <p>Description: ${workout.description}</p>
-              </div>
-            `;
-          });
-        });
-    }*/
-
 
 function fetchEvents() {
     fetch('/api/events')
@@ -201,28 +173,6 @@ fetch(`/api/add/${value}`, {
   
 }
 
-
-
-/**function selectProfilePic(src){
-    document.querySelectorAll('.picture-gallery img').forEach(img =>{
-      img.classList.remove('selected');
-    });
-
-  const selectedImage = document.querySelector('.picture-gallery img[src="${src}"]');
-  selectedImage.classList.add('selected');
-
-  fetch('/updatedProfilePricture',{
-    method: 'POST',
-    headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({profliePicture:src})
-  }).then(response => {
-      if(response.ok){
-        document.getElementById('profile-photo').src=src;
-      }else{
-        alert('Error updating profile picture');
-      }
-  });
-}*/
 
 document.getElementById('fileInput').addEventListener('change', function(event) {
             const file = event.target.files[0];
