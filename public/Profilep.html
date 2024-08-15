@@ -80,10 +80,74 @@
   <p>Thank you for choosing GymGenius</p>
 
 </footer>
-<script src="profile.js"></script> 
+<!--<script src="profile.js"></script> -->
  <script>
   
   
+  document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('workout-form');
+            const workoutList = document.getElementById('workout-list');
+            const workoutIdInput = document.getElementById('workout-id');
+            
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault();
+
+                // Get form values
+                const name = document.getElementById('name').value;
+                const date = document.getElementById('date').value;
+                const location = document.getElementById('location').value;
+                const description = document.getElementById('description').value;
+
+                // Check if all required fields are filled
+                if (!name || !date || !location) {
+                    alert('Please fill in all required fields.');
+                    return;
+                }
+
+                // Create a workout object
+                const workout = {
+                    name,
+                    date,
+                    location,
+                    description
+                };
+
+                try {
+                    const response = await fetch('/submit-workout', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(workout)
+                    });
+
+                    const result = await response.json();
+                    console.log('Server response:', result);
+                    alert(result.message);
+
+                    // Optionally update the workout list with the new data
+                    displayWorkouts(result.data);
+                } catch (error) {
+                    console.error('Error submitting workout:', error);
+                }
+            });
+
+            function displayWorkouts(workouts) {
+                workoutList.innerHTML = ''; // Clear the list
+
+                workouts.forEach(workout => {
+                    const workoutItem = document.createElement('div');
+                    workoutItem.className = 'workout-item';
+                    workoutItem.innerHTML = `
+                        <h3>${workout.name}</h3>
+                        <p><strong>Date:</strong> ${workout.date}</p>
+                        <p><strong>Location:</strong> ${workout.location}</p>
+                        <p><strong>Description:</strong> ${workout.description}</p>
+                    `;
+                    workoutList.appendChild(workoutItem);
+                });
+            }
+        });
  
   document.addEventListener('DOMContentLoaded', async () => {
   

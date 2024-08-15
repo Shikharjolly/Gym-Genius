@@ -287,56 +287,23 @@ app.delete('/api/events/:id', async (req, res) => {
 });
 
 
-const workoutSchema = new mongoose.Schema({
-    name: String,
-    date: Date,
-    location: String,
-    description: String,
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' } // Reference to User
-});
+let workouts = [];
 
-const Workout = mongoose.model('Workout', workoutSchema);
+// Handle POST requests to /submit-workout
+app.post('/submit-workout', (req, res) => {
+    const workoutData = req.body;
+    console.log('Received workout data:', workoutData);
 
-  
-  app.use(cors());
-  app.use(bodyParser.json());
+    // Add workout to the array
+    workouts.push(workoutData);
 
-  app.post('/api/workouts', async (req, res) => {
-    const token = req.headers['authorization'];
-    if (!token) return res.status(401).send('No token provided');
-
-    jwt.verify(token, jwtSecret, async (err, decoded) => {
-        if (err) return res.status(401).send('Invalid token');
-        
-        try {
-            const workout = new Workout({
-                ...req.body,
-                user: decoded.id // Associate workout with the user
-            });
-            await workout.save();
-            res.status(201).json(workout);
-        } catch (err) {
-            res.status(500).send('Error creating workout');
-        }
+    // Respond with the updated list of workouts
+    res.json({
+        message: 'Workout data received successfully!',
+        data: workouts
     });
 });
-  
-// GET endpoint to fetch all workouts for the authenticated user
-app.get('/api/workouts', async (req, res) => {
-    const token = req.headers['authorization'];
-    if (!token) return res.status(401).send('No token provided');
 
-    jwt.verify(token, jwtSecret, async (err, decoded) => {
-        if (err) return res.status(401).send('Invalid token');
-        
-        try {
-            const workouts = await Workout.find({ user: decoded.id });
-            res.json(workouts);
-        } catch (err) {
-            res.status(500).send('Error fetching workouts');
-        }
-    });
-});
   
 
 app.use(express.static(path.join(__dirname, 'public')));
