@@ -67,15 +67,18 @@ nav ul {
 }
 /** Add some styles for the image container */
 #imageContainer {
-    width: 300px;
-    height: 300px;
-    overflow: hidden;
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+    margin-top: 20px;  
 }
 
 #uploadedImage {
-    width: 100%;
-    height: auto;
-    display: block;
+    width: 200px;            
+  height: 200px;          
+  object-fit: cover;       
+  border-radius: 50%;      
+  border: 2px solid #ccc;
 }
 
 .profile form{
