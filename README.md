@@ -13,7 +13,8 @@ STEP 3: after you see that in your terminal, open up a browser and copy/paste th
 
 STEP 4: hit enter and you should see the index.html page. 
 
-
+# Project Presentation / Gym-Genius Guide 
+https://docs.google.com/presentation/d/1JY_k3-3bZHa5AgohlF2A1wvPVdnmXFM2sSVgxixzoNs/edit?usp=sharing
 
 # Gym-Genius
 A simple and gimmick free way to workout!
@@ -39,10 +40,10 @@ This is more like an about page, showcasing not only the types of events, but th
 
 ## Event
 This is where users can apply simple CRUD operations to events. Users will be able to create, edit and delete events to their hearts content. Any user will be able to do this.
+  
 
 
 
-
-
+ 
 
 

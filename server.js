@@ -17,7 +17,7 @@ const multer = require('multer');
 const app = express();
 const PORT = 2000;
 const jwtSecret = 'your_jwt_secret_key';
-//const num = 23;
+
 
 
 app.use(cors());
