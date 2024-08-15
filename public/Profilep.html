@@ -26,7 +26,7 @@
     </section>
 </header>
    
-<div class="content-wrapper">
+
   <section class="profile">
       <input type="file" id="fileInput" accept="image/*">
       <div id="imageContainer">
@@ -38,14 +38,15 @@
       <p id="account-balance"></p>
       <a href="http://localhost:2000/login.html" id="logout">Logout</a>  
       <a href="http://localhost:2000/checkout.html" id="checkout">Checkout</a>  
-    </div>
+   
 </section>
 
 <main>
   <div class="content-wrapper">
     <section class="workouts">
       <h2>Manage Your Workouts</h2>
-      <div class="flex-container">
+    
+     
         <form id="workout-form">
           <input type="hidden" id="workout-id">
           <label for="name">Workout Name:</label>
@@ -58,14 +59,15 @@
           <textarea id="description"></textarea>
           <button type="submit" id="submit-button">Save</button>
         </form>
+       
         <div id="workout-list"></div>
-      </div>
+      
     </section>
     
     <section class="events">
       <h2>Upcoming Gym Events</h2>
       <form class="event-form">
-        <button type="button" onclick="addEvent()"> <a href="http://localhost:2000/event.html">Add Event</a></button>
+        <button type="button" id = "add-event-button" onclick="addEvent()"> <a href="http://localhost:2000/event.html">Add Event</a></button>
       </form>
 
     <div id="event-list">
@@ -80,7 +82,7 @@
   <p>Thank you for choosing GymGenius</p>
 
 </footer>
-<!--<script src="profile.js"></script> -->
+
  <script>
   
   
@@ -92,19 +94,19 @@
             form.addEventListener('submit', async (event) => {
                 event.preventDefault();
 
-                // Get form values
+          
                 const name = document.getElementById('name').value;
                 const date = document.getElementById('date').value;
                 const location = document.getElementById('location').value;
                 const description = document.getElementById('description').value;
 
-                // Check if all required fields are filled
+            
                 if (!name || !date || !location) {
                     alert('Please fill in all required fields.');
                     return;
                 }
 
-                // Create a workout object
+           
                 const workout = {
                     name,
                     date,
@@ -125,7 +127,7 @@
                     console.log('Server response:', result);
                     alert(result.message);
 
-                    // Optionally update the workout list with the new data
+                 
                     displayWorkouts(result.data);
                 } catch (error) {
                     console.error('Error submitting workout:', error);
@@ -133,7 +135,7 @@
             });
 
             function displayWorkouts(workouts) {
-                workoutList.innerHTML = ''; // Clear the list
+                workoutList.innerHTML = ''; 
 
                 workouts.forEach(workout => {
                     const workoutItem = document.createElement('div');
