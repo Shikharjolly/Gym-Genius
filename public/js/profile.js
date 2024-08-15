@@ -29,7 +29,6 @@ const { response } = require("express");
           document.getElementById('username').innerText = `Username: ${user.username}`;
           document.getElementById('email').innerText = `Email: ${user.email}`;
           document.getElementById('bio').innerText = `Bio: ${user.bio}`;
-          document.getElementById('profileImage'). src =user.profilePicture ||'default-profile.png';
         } else {
           alert('Error loading profile');
           window.location.href = 'login.html';
@@ -39,35 +38,7 @@ const { response } = require("express");
         fetchWorkouts();
         
     });
-    document.addEventListener('DOMContentLoaded', () => {
-      const form = document.getElementById('uploadForm');
-      const profileImage = document.getElementById('profile-photo');
-  
-      form.addEventListener('submit', async (event) => {
-          event.preventDefault();
-  
-          const formData = new FormData(form);
-          const token = localStorage.getItem('token'); // Adjust token retrieval as needed
-  
-          try {
-              const response = await fetch('/api/updateProfilePicture', {
-                  method: 'POST',
-                  headers: {
-                      'Authorization': `Bearer ${token}`
-                  },
-                  body: formData
-              });
-  
-              if (!response.ok) throw new Error('Failed to upload image');
-  
-              const result = await response.json();
-              profileImage.src = result.profilePictureUrl; // Update image source with the URL returned from the server
-  
-          } catch (error) {
-              console.error('Error uploading profile picture:', error);
-          }
-      });
-  });
+    //profile backend 
     function fetchEvents() {
       fetch('/api/events')
           .then(response => response.json())

@@ -6,7 +6,7 @@ const path = require('path');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const multer = require('multer');
-const fs= require('fs');
+
 
 
 
@@ -24,21 +24,6 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
-
-const upload = multer({
-    dest: 'uploads/',
-    limits: {fileSize: 5 * 1024 * 1024}, //limiting size to 5MB
-    fileFilter(req, file,cb){
-        if(!file.originalname.match(/\.(jpg|jpeg|png)$/)){
-            return cb(new Error('Please upload an image'));
-        }
-        cb(null,true);
-    }
-});
-
-//if (!fs.existsSync('uploads')){
-   // fs.mkdirSync('uploads');}
-
 
 mongoose.connect('mongodb+srv://movieguy3333:Eg3csWV4A@testapicluster.qmp6iba.mongodb.net/?retryWrites=true&w=majority&appName=TestApiCluster');
 const db = mongoose.connection;
@@ -63,37 +48,26 @@ const userSchema = new mongoose.Schema({
     app.use(express.static('public'));
     
 
-// Define the `updateUserProfilePicture` function
-const updateUserProfilePicture = async (userId, profilePicture) => {
-    try {
-        await User.findByIdAndUpdate(userId, { profilePicture });
-    } catch (err) {
-        throw new Error('Error updating profile picture');
+// Define the `updateUserProfilePicture` function// Set up storage with Multer
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'uploads/');
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now() + path.extname(file.originalname)); // Append timestamp to filename
     }
-};
-app.post('/api/updateProfilePicture', upload.single('profilePicture'), async (req, res) => {
-    const token = req.headers['authorization'];
-    if (!token) return res.status(401).send('No token provided');
-
-    jwt.verify(token, jwtSecret, async (err, decoded) => {
-        if (err) return res.status(401).send('Invalid token');
-        
-        const userId = decoded.id;
-        const file = req.file;
-
-        if (!file) return res.status(400).send('No file uploaded');
-
-        const filePath = path.join('uploads', file.filename);
-        const fileUrl = `${req.protocol}://${req.get('host')}/uploads/${file.filename}`;
-
-        try {
-            await updateUserProfilePicture(userId, fileUrl);
-            res.status(200).json({ profilePictureUrl: fileUrl });
-        } catch (err) {
-            res.status(500).send('Error updating profile picture');
-        }
-    });
-});
+  });
+  
+  const upload = multer({ storage: storage });
+  
+  // Serve static files from the 'uploads' directory
+  app.use('/uploads', express.static('uploads'));
+  
+  // Endpoint to handle file uploads
+  app.post('/upload', upload.single('image'), (req, res) => {
+    res.json({ filePath: `/uploads/${req.file.filename}` });
+  });
+  
 
 
     app.post('/signup', async (req, res) => {
