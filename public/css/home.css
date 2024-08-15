@@ -1,29 +1,21 @@
-body  {
+body {
     margin: 0;
     font-family: Arial, sans-serif;
     line-height: 1.6;
-
- 
-    
 }
-
-
-
 
 header {
     background: #0d0d0d;
     color: #fff;
-    padding: 0.4px;
-    
+    padding: 6px; 
 }
 
-#nav-container{
-   
+#nav-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-left: 5em;
-    padding-right: 5em;
+    padding-left: 80px; 
+    padding-right: 80px;
 }
 
 nav h1 {
@@ -40,59 +32,51 @@ nav ul {
     opacity: 0.7;
     transition: 0.3s;
 }
+
 .nav-element:hover {
     opacity: 1;
     background-color: rgb(29, 29, 29);
-   
-   
 }
 
-
-.nav-link{
+.nav-link {
     color: #fff;
     text-decoration: none;
-} 
+}
 
 .heading-banner {
     background: url('../images/Gym-Genius-Logo.png') no-repeat center center/cover;
     background-size: 400px 400px;
     color: #fff;
     text-align: center;
-    padding: 5em 1em;
-    text-shadow: 3px 3px 12px rgb(0, 0, 0);
+    padding: 80px 16px;
+    text-shadow: 5px 5px 12px rgb(0, 0, 0);
 }
-
-
 
 .button {
     display: inline-block;
     background: #a20101;
     color: #fff;
-    padding: 0.5em 1em;
+    padding: 8px 16px; 
     text-decoration: none;
     border-radius: 5px;
 }
 
-
 main {
-    padding: 2em 1em;
+    padding: 32px 16px; 
 }
 
-
-
 h2 {
-    margin-bottom: 0.5em;
+    margin-bottom: 8px;
 }
 
 .events {
     display: flex;
-    gap: 1em;
+    gap: 16px;
 }
 
 .type-of-event {
     flex: 1;
     padding: 10px;
-  
     border: 1px solid #ddd;
     border-radius: 5px;
     text-align: center;
@@ -101,33 +85,29 @@ h2 {
 form {
     display: flex;
     flex-direction: column;
-    gap: 0.5px;
+    gap: 8px; 
 }
 
 form label {
-    margin-bottom: 0.2px;
+    margin-bottom: 3px; 
 }
 
 form input, form textarea {
-    padding: 0.5px;
+    padding: 8px; 
     border: 1px solid #f8b4b4;
     border-radius: 5px;
- 
-  
-  
 }
 
 .event-item {
-    border: 1px solid #ccc;
+    border: 2px rgb(230, 76, 16) inset;
+    background: #f9f9f9;
     padding: 20px;
     margin-bottom: 15px;
 }
-
-
 
 footer {
     background: #333;
     color: #fff;
     text-align: center;
-    padding: 2em;
+    padding: 32px; 
 }

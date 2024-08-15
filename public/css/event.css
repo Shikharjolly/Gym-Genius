@@ -109,7 +109,8 @@ button:hover {
 }
 
 .event-item {
-    border: 1px solid #ccc;
+    border: 2px rgb(230, 76, 16) inset;
+    background: #f9f9f9;
     padding: 20px;
     margin-bottom: 15px;
 }
