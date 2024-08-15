@@ -28,14 +28,18 @@
    
 <div class="content-wrapper">
   <section class="profile">
-    <div class="profile-info">
+<    <!--<div class="profile-info">
       <h1>User Profile</h1>
       <img id="profileImage" src="../public/images/Gym-Genius-Logo.png"/>
       <form id="uploadForm" enctype="multipart/form-data">
           <label for="profilePicture">Upload Profile Picture:</label>
           <input type="file" id="profilePicture" name="profilePicture" accept="image/*">
           <button type="submit">Upload</button>
-      </form>
+      </form>>-->
+      <input type="file" id="fileInput" accept="image/*">
+      <div id="imageContainer">
+          <img id="uploadedImage" src="" alt="Uploaded Image">
+      </div>
       <p id="username"></p>
       <p id="email"></p>
       <p id="bio"></p>
@@ -199,7 +203,7 @@ fetch(`/api/add/${value}`, {
 
 
 
-function selectProfilePic(src){
+/**function selectProfilePic(src){
     document.querySelectorAll('.picture-gallery img').forEach(img =>{
       img.classList.remove('selected');
     });
@@ -218,7 +222,18 @@ function selectProfilePic(src){
         alert('Error updating profile picture');
       }
   });
-}
+}*/
+
+document.getElementById('fileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('uploadedImage').src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
 
 
 </script> 
