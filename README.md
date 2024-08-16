@@ -1,7 +1,10 @@
 # Team Members / Contributors
 Movieguy3333 (Muaad Alomari)
+
 angiervr81 (Angie Rivera)
+
 Shikharjolly (Shikhar Jolly)
+
 DaveP223 (Dave Pierre)
 
 # HOW TO GET STARTED
