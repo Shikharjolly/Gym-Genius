@@ -21,9 +21,6 @@ STEP 3: after you see that in your terminal, open up a browser and copy/paste th
 
 STEP 4: hit enter and you should see the index.html page. 
 
-# Project Presentation / Gym-Genius Guide 
-https://docs.google.com/presentation/d/1JY_k3-3bZHa5AgohlF2A1wvPVdnmXFM2sSVgxixzoNs/edit?usp=sharing
-
 # Gym-Genius
 A simple and gimmick free way to workout!
 The only bad workout is one that did not happen
